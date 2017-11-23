@@ -41,7 +41,7 @@ Licensed under the same terms as Go itself:
 https://code.google.com/p/go/source/browse/LICENSE
 ```
 
-Some test and comments are adapted from https://github.com/oliverpool/nio:
+Some test and comments are adapted from https://github.com/djherbis/nio:
 ```
 The MIT License (MIT)
 
