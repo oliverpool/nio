@@ -3,7 +3,6 @@ nio
 
 [![GoDoc](https://godoc.org/github.com/oliverpool/nio?status.svg)](https://godoc.org/github.com/oliverpool/nio)
 [![Release](https://img.shields.io/github/release/oliverpool/nio.svg)](https://github.com/oliverpool/nio/releases/latest)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.txt)
 [![Build Status](https://travis-ci.org/oliverpool/nio.svg)](https://travis-ci.org/oliverpool/nio)
 [![Coverage Status](https://coveralls.io/repos/oliverpool/nio/badge.svg?branch=master)](https://coveralls.io/r/oliverpool/nio?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/oliverpool/nio)](https://goreportcard.com/report/github.com/oliverpool/nio)
