@@ -1,12 +1,12 @@
-nio 
+nio
 ==========
 
-[![GoDoc](https://godoc.org/github.com/djherbis/nio?status.svg)](https://godoc.org/github.com/djherbis/nio) 
-[![Release](https://img.shields.io/github/release/djherbis/nio.svg)](https://github.com/djherbis/nio/releases/latest)
+[![GoDoc](https://godoc.org/github.com/oliverpool/nio?status.svg)](https://godoc.org/github.com/oliverpool/nio)
+[![Release](https://img.shields.io/github/release/oliverpool/nio.svg)](https://github.com/oliverpool/nio/releases/latest)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.txt)
-[![Build Status](https://travis-ci.org/djherbis/nio.svg)](https://travis-ci.org/djherbis/nio)
-[![Coverage Status](https://coveralls.io/repos/djherbis/nio/badge.svg?branch=master)](https://coveralls.io/r/djherbis/nio?branch=master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/djherbis/nio)](https://goreportcard.com/report/github.com/djherbis/nio)
+[![Build Status](https://travis-ci.org/oliverpool/nio.svg)](https://travis-ci.org/oliverpool/nio)
+[![Coverage Status](https://coveralls.io/repos/oliverpool/nio/badge.svg?branch=master)](https://coveralls.io/r/oliverpool/nio?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/oliverpool/nio)](https://goreportcard.com/report/github.com/oliverpool/nio)
 
 Usage
 -----
@@ -15,24 +15,9 @@ The Buffer interface:
 
 ```go
 type Buffer interface {
-	Len() int64
-	Cap() int64
 	io.ReadWriter
+	Len() int
 }
-
-```
-
-nio's Copy method concurrently copies from an io.Reader to a supplied nio.Buffer, 
-then from the nio.Buffer to an io.Writer. This way, blocking writes don't slow the io.Reader.
-
-```go
-import (
-  "github.com/djherbis/buffer"
-  "github.com/djherbis/nio"
-)
-
-buf := buffer.New(32*1024) // 32KB In memory Buffer
-nio.Copy(w, r, buf) // Reads and Writes concurrently, buffering using buf.
 ```
 
 nio's Pipe method is a buffered version of io.Pipe
@@ -40,26 +25,44 @@ The writer return once its data has been written to the Buffer.
 The reader returns with data off the Buffer.
 
 ```go
-import (
-  "gopkg.in/djherbis/buffer.v1"
-  "gopkg.in/djherbis/nio.v2"
-)
+import "github.com/oliverpool/nio"
 
-buf := buffer.New(32*1024) // 32KB In memory Buffer
-r, w := nio.Pipe(buf)
+var buf bytes.Buffer
+r, w := nio.NewPipe(&buf)
 ```
 
-Installation
-------------
-```sh
-go get gopkg.in/djherbis/nio.v2
+
+Licences
+--------
+
+The code in pipe.go is adapted from https://github.com/bradfitz/http2/blob/master/pipe.go
+```
+Copyright 2014 The Go Authors.
+See https://code.google.com/p/go/source/browse/CONTRIBUTORS
+Licensed under the same terms as Go itself:
+https://code.google.com/p/go/source/browse/LICENSE
 ```
 
-For some pre-built buffers grab:
-```sh
-go get gopkg.in/djherbis/buffer.v1
+Some test and comments are adapted from https://github.com/oliverpool/nio:
 ```
+The MIT License (MIT)
 
-Mentions
-------------
-[GopherCon 2017: Peter Bourgon - Evolutionary Optimization with Go](https://www.youtube.com/watch?v=ha8gdZ27wMo&start=2077&end=2140)
+Copyright (c) 2015 Dustin H
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
