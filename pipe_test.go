@@ -61,7 +61,7 @@ func TestPipeCloseEarly(t *testing.T) {
 
 	_, err = io.Copy(ioutil.Discard, p)
 	if err != nil {
-		t.Errorf("expected nil, got %v")
+		t.Errorf("expected nil, got %v", err)
 	}
 }
 
